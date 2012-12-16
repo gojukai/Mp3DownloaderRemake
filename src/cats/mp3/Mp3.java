@@ -28,7 +28,7 @@ public class Mp3{
 			
 	public Mp3(final Mp3SearchEngine engine, final String fileName, final String ref){
 		this.engine = engine;
-		this.fileName = fileName.replaceAll("&#039;", "'").replaceAll("%20", " ").replaceAll("&amp;", "&").replaceAll("&quot;", "\"");
+		this.fileName = fileName.replaceAll("&#039;", "'").replaceAll("%20", " ").replaceAll("&amp;", "&").replaceAll("&quot;", "\"").replaceAll(File.pathSeparator, "-");
 		if(!this.fileName.endsWith(".mp3")) this.fileName += ".mp3";
 		this.ref = ref;
 				
@@ -47,7 +47,7 @@ public class Mp3{
 				double bytesRead = 0;
 				int singleRead = 0;
 				byte[] buffer = new byte[15600];
-				File out = new File(engine.getDestinationDirectory(), fileName);
+				File out = new File(engine.getDestinationDirectory(), Mp3.this.fileName);
 				try{
 					final URL url = new URL(downloadLink);
 					final URLConnection connection = url.openConnection();
